@@ -7,13 +7,16 @@ Learn to use a Waveshare e-Paper display with Raspberry Pi
 Waveshare provides example code for their e-Paper displays on GitHub, and documentation on their wiki:
 
 https://github.com/waveshare/e-Paper
+
 https://www.waveshare.com/wiki/Main_Page
 
 The `/lib` and `/pic` directory contents in this repository were copied from the Raspberry Pi Python section of **waveshare/e-Paper**.
 
+Thank you, @waveshare, for providing this library and examples :bow:
+
 ## `/fonts` includes Tamzen font
 
-PIL.ImageDraw appears to be happy with many different font formats. I figure monospace bitmap fonts will work most reliably.
+PIL.ImageDraw appears to be happy with many different font formats. I figure monospace bitmap fonts will work most reliably on this display.
 
 @Tecate provides [a catalog of bitmap fonts](https://github.com/Tecate/bitmap-fonts). I tried several and chose to work with Tamzen first:
 
