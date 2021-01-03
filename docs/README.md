@@ -26,19 +26,19 @@ In particular I like that Tamzen includes a variety of sizes in bold and regular
 
 :hat-tip: @sunaku and Scott Fial, thank you for Tamzen and Tamsyn :bow:
 
-# Screen size
+## Screen size
 
 A simple thing to do with a display is put text on it. To do that you may want to know how many rows and columns will fit.
 
 Using Tamzen regular on a Waveshare [2.13inch e-Paper HAT](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT) V2 I found these dimensions:
 
-| Font | Columns | Rows | Step |
-|:- |:-:|:-:|:-:|
-| Tamzen5x9r.bdf | 50 | 13 | 13 |
-| Tamzen6x12r.bdf | 42 | 10 | 12 |
-| Tamzen6x12r.bdf | 42 | 9 | 14 |
-| Tamzen8x16r.bdf | 31 | 7 | 18 |
-| Tamzen10x20r.bdf | 25 | 6 | 21 |
+| Font | Columns | Rows | Step | Box |
+|:- |:-:|:-:|:-:|:-:|
+| Tamzen5x9r.bdf | 50 | 13 | 13 | |
+| Tamzen6x12r.bdf | 41 | 10 | 12 | 1,2 to 248,120 |
+| Tamzen6x12r.bdf | 41 | 9 | 13 | 1,2 to 248,118 |
+| Tamzen8x16r.bdf | 31 | 7 | 17 | 1,1 to 248,120 |
+| Tamzen10x20r.bdf | 25 | 6 | 20 | 0,1 to 249,120 |
 
 To demonstrate each of those I used Python like this, learning from Waveshare's examples on the way:
 

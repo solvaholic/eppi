@@ -17,9 +17,14 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
-    # Tell PIL where to find the font
+    # Tell PIL where to find fonts
     fontdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'fonts', 'tamzen-font', 'bdf')
+    font12 = ImageFont.truetype(os.path.join(fontdir, 'Tamzen6x12r.bdf'), 12)
+    font12b = ImageFont.truetype(os.path.join(fontdir, 'Tamzen6x12b.bdf'), 12)
     font16 = ImageFont.truetype(os.path.join(fontdir, 'Tamzen8x16r.bdf'), 16)
+    font16b = ImageFont.truetype(os.path.join(fontdir, 'Tamzen8x16b.bdf'), 16)
+    font20 = ImageFont.truetype(os.path.join(fontdir, 'Tamzen10x20r.bdf'), 20)
+    font20b = ImageFont.truetype(os.path.join(fontdir, 'Tamzen10x20b.bdf'), 20)
 
     # Initialize the display
     epd = epd2in13_V2.EPD()
@@ -32,9 +37,10 @@ try:
     draw = ImageDraw.Draw(image)
 
     # Draw text onto the bitmap
-    mystring = '.........#'*6
+    mystring = '.0.......#'*6
+    mystring = '0'*41
     myx = 1
-    for myy in range(1,122,18):
+    for myy in range(1,122,17):
         draw.text((myx, myy), mystring, font = font16, fill = 0)
     
     # Push the bitmap to the display
