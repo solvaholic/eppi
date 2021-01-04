@@ -2,6 +2,67 @@
 
 Learn to use a Waveshare e-Paper display with Raspberry Pi
 
+## Getting started
+
+Many web sites provide answers and documentation about using Raspberry Pi. <raspberrypi.org> and <adafruit.com> are two I visit often.
+
+If you can get Waveshare's [samples](https://github.com/waveshare/e-Paper) running then any introductory computer programming course that uses Python should equip you to to begin adapting them.
+
+Here are the steps I took, to get a Waveshare [2.13inch e-Paper HAT](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT) V2 working with a Raspberry Pi 4B:
+
+1. Install [Raspberry Pi OS Lite](https://www.raspberrypi.org/software/operating-systems/#raspberry-pi-os-32-bit) on the Pi.
+1. Run `sudo raspi-config` to set locale, configure networking, enable SSH, and enable SPI
+1. Install updates and additional packages:
+
+    ```
+    sudo apt update && sudo apt upgrade -y
+    sudo apt install git python3-pip python3-pil python3-numpy
+    sudo pip3 install RPi.GPIO
+    sudo pip3 install spidev
+    ```
+
+1. Install BCM2835 libraries:
+
+    ```
+    wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.60.tar.gz
+    tar zxvf bcm2835-1.60.tar.gz 
+    cd bcm2835-1.60/
+    sudo ./configure
+    sudo make
+    sudo make check
+    sudo make install
+    #For more details, please refer to http://www.airspayce.com/mikem/bcm2835/
+    ```
+
+    These instructions :point_up: are from [Waveshare's wiki](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT).
+
+1. Shut the Pi down, disconnect its power, and install the display. The HAT will sit right onto your Pi's GPIO header pins.
+
+    I used the included dongle, connecting the wires to the pins of my Pi 4B as below:
+
+    | Color | Name | Pin |
+    |:-:|:-:|:-:|
+    | Gray | VCC | 17 |
+    | Brown | GND | 25 |
+    | Blue | DIN | 19 |
+    | Yellow | CLK | 23 |
+    | Orange | CS | 24 |
+    | Green | DC | 22 |
+    | White | RST | 11 |
+    | Purple | BUSY | 18 |
+
+    After you get it hooked up, plug in the power and boot your Pi.
+
+1. Clone the **waveshare/e-Paper** repository and run the example script:
+
+    ```
+    mkdir -p ~/repos && cd ~/repos
+    git clone https://github.com/waveshare/e-Paper
+    python3 e-Paper/RaspberryPi_JetsonNano/python/examples/epd_2in13_V2_test.py
+    ```
+
+At that point it Just Worked: The example script made a series of images appear on the display.
+
 ## `/lib` and `/pic` from waveshare/e-Paper
 
 Waveshare provides example code for their e-Paper displays on GitHub, and documentation on their wiki:
