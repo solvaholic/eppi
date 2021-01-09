@@ -10,6 +10,7 @@ if os.path.exists(libdir):
 
 import logging
 from waveshare_epd import epd2in13_V2
+import textwrap
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
@@ -36,12 +37,32 @@ try:
     image = Image.new('1', (250, 122), 255)  # 255: clear the frame    
     draw = ImageDraw.Draw(image)
 
+    # Set the message to be displayed
+    mystring = sys.stdin.read()
+    if mystring == "":
+        # stdin was empty, so set mystring manually
+        mystring = 'All work and no play makes Jack a dull boy. '*18
+
+    # Set which font to use
+    myfont = font20b
+
+    # How wide and high is a character in this font?
+    charW, charH = myfont.getsize('#')
+
+    # Figure origin and dimensions based on size of character
+    xyUL = ( int(250%charW/2), int(122%charH/2) )
+    maxCols = int(250/charW)
+    maxRows = int(122/charH)
+
     # Draw text onto the bitmap
-    mystring = '.0.......#'*6
-    mystring = '0'*41
-    myx = 1
-    for myy in range(1,122,17):
-        draw.text((myx, myy), mystring, font = font16, fill = 0)
+    mylines = textwrap.TextWrapper(width=maxCols).wrap(mystring)
+    curLine = 0
+    for line in mylines:
+        curXy = (xyUL[0], charH*curLine+xyUL[1])
+        draw.text(curXy, line, font = myfont, fill = 0)
+        curLine = curLine + 1
+        if curLine >= maxRows:
+            break
     
     # Push the bitmap to the display
     epd.displayPartial(epd.getbuffer(image))
