@@ -4,9 +4,9 @@ Learn to use a Waveshare e-Paper display with Raspberry Pi
 
 ## Getting started
 
-Many web sites provide answers and documentation about using Raspberry Pi. <raspberrypi.org> and <adafruit.com> are two I visit often.
+Many web sites provide answers and documentation about using Raspberry Pi. <https://raspberrypi.org> and <https://adafruit.com> are two I visit often.
 
-If you can get Waveshare's [samples](https://github.com/waveshare/e-Paper) running then any introductory computer programming course that uses Python should equip you to to begin adapting them.
+If you can get Waveshare's [samples](https://github.com/waveshare/e-Paper) running then any introductory computer programming course using Python should equip you to to begin modifying them.
 
 Here are the steps I took, to get a Waveshare [2.13inch e-Paper HAT](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT) V2 working with a Raspberry Pi 4B:
 
@@ -36,9 +36,9 @@ Here are the steps I took, to get a Waveshare [2.13inch e-Paper HAT](https://www
 
     These instructions :point_up: are from [Waveshare's wiki](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT).
 
-1. Shut the Pi down, disconnect its power, and install the display. The HAT will sit right onto your Pi's GPIO header pins.
+1. Shut the Pi down, disconnect its power, and install the display. The HAT will sit right onto the Pi's GPIO header pins.
 
-    I used the included dongle, connecting the wires to the pins of my Pi 4B as below:
+    In case you prefer to use the included dongle, connect the wires to the pins of the Pi as below:
 
     | Color | Name | Pin |
     |:-:|:-:|:-:|
@@ -51,6 +51,8 @@ Here are the steps I took, to get a Waveshare [2.13inch e-Paper HAT](https://www
     | White | RST | 11 |
     | Purple | BUSY | 18 |
 
+    See [Waveshare's wiki](https://www.waveshare.com/wiki/2.13inch_e-Paper_HAT) for complete details, and raspberrypi.org for [details about the GPIO header](https://www.raspberrypi.org/documentation/usage/gpio/README.md).
+
     After you get it hooked up, plug in the power and boot your Pi.
 
 1. Clone the **waveshare/e-Paper** repository and run the example script:
@@ -61,7 +63,7 @@ Here are the steps I took, to get a Waveshare [2.13inch e-Paper HAT](https://www
     python3 e-Paper/RaspberryPi_JetsonNano/python/examples/epd_2in13_V2_test.py
     ```
 
-At that point it Just Worked: The example script made a series of images appear on the display.
+At that point it should Just Work: The example script makes a series of images appear on the display.
 
 ## `/lib` and `/pic` from waveshare/e-Paper
 
@@ -77,13 +79,11 @@ Thank you, @waveshare, for providing this library and examples :bow:
 
 ## `/fonts` includes Tamzen font
 
-PIL.ImageDraw appears to be happy with many different font formats. I figure monospace bitmap fonts will work most reliably on this display.
-
-@Tecate provides [a catalog of bitmap fonts](https://github.com/Tecate/bitmap-fonts). I tried several and chose to work with Tamzen first:
+This project uses PIL.ImageDraw to put text on the e-paper display. PIL.ImageDraw appears to be happy with many different font formats. This project uses the monospace bitmap font Tamzen:
 
 https://github.com/sunaku/tamzen-font
 
-In particular I like that Tamzen includes a variety of sizes in bold and regular. I find it also quite easy to read on the e-Paper display.
+In case you'd like to use other fonts, @Tecate provides [a catalog of bitmap fonts](https://github.com/Tecate/bitmap-fonts).
 
 :hat-tip: @sunaku and Scott Fial, thank you for Tamzen and Tamsyn :bow:
 
@@ -101,7 +101,7 @@ Using Tamzen regular on a Waveshare [2.13inch e-Paper HAT](https://www.waveshare
 | Tamzen8x16r.bdf | 31 | 7 | 17 | 1,1 to 248,120 |
 | Tamzen10x20r.bdf | 25 | 6 | 20 | 0,1 to 249,120 |
 
-To demonstrate each of those I used Python like this, learning from Waveshare's examples on the way:
+You can use Python like below to demonstrate different combinations of settings:
 
 ```python
 # Tell PIL where to find the font
