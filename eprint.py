@@ -18,6 +18,9 @@ import traceback
 logging.basicConfig(level=logging.DEBUG)
 
 try:
+    # Get mystring early, to block processing til stdio ends
+    mystring = sys.stdin.read()
+
     # Tell PIL where to find fonts
     fontdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'fonts', 'tamzen-font', 'bdf')
     font12 = ImageFont.truetype(os.path.join(fontdir, 'Tamzen6x12r.bdf'), 12)
@@ -38,7 +41,6 @@ try:
     draw = ImageDraw.Draw(image)
 
     # Set the message to be displayed
-    mystring = sys.stdin.read()
     if mystring == "":
         # stdin was empty, so set mystring manually
         mystring = 'All work and no play makes Jack a dull boy. '*18
