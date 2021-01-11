@@ -127,3 +127,27 @@ for myy in range(1,122,18):
 # Push the bitmap to the display
 epd.displayPartial(epd.getbuffer(image))
 ```
+
+## `/eprint.py` and `/listen.sh`
+
+`eprint.py` accepts a message on standard input (stdin) and displays it. For example:
+
+```
+echo 'Hello World!' | ./eprint.py
+```
+
+`listen.sh` does these three steps in order, in a loop, until it's interrupted:
+
+1. Listen for input on UDP port 34567
+1. When a message is received, run `eprint.py` to write it to the display
+1. Wait 10 seconds
+
+Use netcat to send a message to the listening server. On macOS or Linux terminal:
+
+```
+echo "YourMessageHere" | nc -u HOST 34567 -w0
+```
+
+Your implementation of netcat may balk at the `-w0`. You can try `-w1`, or just remove the option.
+
+In Windows you can use `ncat` in place of `nc`. It's distributed with [nmap](https://nmap.org/download.html).
